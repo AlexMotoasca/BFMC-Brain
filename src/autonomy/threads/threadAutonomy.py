@@ -32,14 +32,17 @@ class threadAutonomy(ThreadWithStop):
             time.sleep(0.1)
             return
 
+        # Center wheels when leaving AUTO
+        self.steerSender.send("0")
+
         # 1. Steer right for 2 seconds
-        self.steerSender.send("20.0")
+        self.steerSender.send("20")
         time.sleep(2.0)
 
         # 2. Steer left for 2 seconds
-        self.steerSender.send("-20.0")
+        self.steerSender.send("-20")
         time.sleep(2.0)
 
         # 3. Center wheels for 1 second
-        self.steerSender.send("0.0")
+        self.steerSender.send("0")
         time.sleep(1.0)
