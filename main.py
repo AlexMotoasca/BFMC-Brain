@@ -66,7 +66,7 @@ from src.utils.messages.allMessages import StateChange
 from src.statemachine.stateMachine import StateMachine
 from src.statemachine.systemMode import SystemMode
 from src.utils.logConfig import get_logger
-
+from src.autonomy.processAutonomy import processAutonomy
 # ------ New component imports starts here ------#
 
 
@@ -176,6 +176,10 @@ if __name__ == "__main__":
     allEvents.extend([camera_ready, traffic_com_ready, serial_handler_ready, dashboard_ready])
 
     # ------ New component initialize starts here ------#
+    autonomy_ready = Event()
+    processAutonomyInstance = processAutonomy(queueList, autonomy_ready, debugging=False)
+    allProcesses.append(processAutonomyInstance)
+    allEvents.append(autonomy_ready)
 
     # ------ New component initialize ends here ------#
 
