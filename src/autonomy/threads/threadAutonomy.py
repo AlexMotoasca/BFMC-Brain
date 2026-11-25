@@ -3,15 +3,14 @@ from src.templates.threadwithstop import ThreadWithStop
 from src.utils.messages.allMessages import SteerMotor, StateChange
 from src.utils.messages.messageHandlerSender import messageHandlerSender
 from src.utils.messages.messageHandlerSubscriber import messageHandlerSubscriber
-
+from src.utils.logConfig import get_logger
 
 class threadAutonomy(ThreadWithStop):
-    def __init__(self, queuesList, logging, debugging=False):
+    def __init__(self, queuesList, debugging=False):
         super().__init__()
         self.queuesList = queuesList
-        self.logging = logging
         self.debugging = debugging
-
+        self.logger = get_logger("Autonomy")
         # Sender to control steering (-25.0 to +25.0 degrees, depending on calibration)
         self.steerSender = messageHandlerSender(self.queuesList, SteerMotor)
 
